@@ -54,7 +54,7 @@ func (sm *SessionManager) OpenSessionManager() {
 						delete(sm.sessions, currentSession.SessionHash)
 					}
 				}
-			case <-sl.doneChan:
+			case <-sm.doneChan:
 				return
 			}
 		}
@@ -63,9 +63,13 @@ func (sm *SessionManager) OpenSessionManager() {
 	go func() {
 		for {
 			time.Sleep(5 * time.Minute)
-			sl.expireChan <- struct{}{}
+			sm.expireChan <- struct{}{}
 		}
 	}()
+}
+
+func (sm *SessionManager) CloseSessionManager() {
+	sm.doneChan <- struct{}{}
 }
 
 func (sm *SessionManager) SetSession(currentSession *Session) {
