@@ -1,0 +1,177 @@
+{{ define "questions" }}
+{{ template "header" .Page_status}}
+	<main role="main" class="container page-content">
+		<div class="row">
+			<div class="col col-2">
+				<div class="row">
+					<div class="col col-12">
+						<h6>Вопросы:</h6>
+					</div>
+					<div class="col col-12 hide-scroll">	 
+				 	 <div class="tab-pane">
+				 	 	<div class="btn-group-vertical text">
+						 	{{$id := .Current_session.CurrentTestId}}
+						 	{{$qid := .Current_session.CurrentQuestionId}}
+						 	{{range $key, $value := (index .Current_session.Tests .Current_session.CurrentTestId).Questions}}
+						 		{{if eq $qid $key}}
+						    	<a class="btn btn-md btn-success" href="/tests/questions?tid={{$id}}&qid={{$key}}" role="button">{{$value.Number}}</a>
+						 		{{else if eq $value.Status 0}}
+						 		<a class="btn btn-md btn-success btn-outline-success pss-dss-text pss-dss-border" href="/tests/questions?tid={{$id}}&qid={{$key}}" role="button">{{$value.Number}}</a>
+						 		{{else}}
+						 		<a class="btn btn-md btn-success pss-dss-color" href="/tests/questions?tid={{$id}}&qid={{$key}}" role="button">{{$value.Number}}</a>
+						 		{{end}}
+						    {{end}}
+						</div>
+					  </div>	
+				    </div>
+				</div>
+				<br>
+			</div>
+			<div id="right-side" class="col col-10">
+				{{ if eq  .Page_error 1 }}
+				<div class="row">
+					<div class="col-12">
+						<div class="alert alert-danger text-center" role="alert">Некорректное КМФ</div>	
+					</div>
+				</div>
+				{{ end }}
+				{{ if eq  .Page_error 2 }}
+				<div class="row">
+					<div class="col-12">
+						<div class="alert alert-danger text-center" role="alert">Некорректный вариант ответа</div>	
+					</div>
+				</div>
+				{{ end }}
+				<div class="row">
+					<div class="col col-1">
+						<a href="/tests" class="badge badge-success pss-dss-color">Список тестов</a>
+					</div>
+					<div class="col col-11">
+						<h3 class="text-center">Вопрос №{{.Quest.Number}}</h3>
+					</div>
+				</div>
+				<div class="row">
+					<div class="container">
+						<div class="row">
+								<div class="col col-10 text-left border rounded pss-dss-color">
+									<p class="strong text-light" id="Description"><span>{{.Quest.Wording}}</span></p>
+								</div>
+							<div class="col col-2">
+								<div class="btn-group-vertical">
+									{{if eq .Question_status 1}}
+										<button type="button" class="btn btn-success" onclick="SMB(1);">Да</button>
+									{{else}}
+										<button type="button" class="btn btn-success pss-dss-color" onclick="SMB(1);">Да</button>
+									{{end}}
+									{{if eq .Question_status 2}}
+										<button type="button" class="btn btn-success" data-toggle="modal" data-target="#KModal">Да, c КМФ</button>
+									{{else}}
+										<button type="button" class="btn btn-success pss-dss-color" data-toggle="modal" data-target="#KModal">Да, с КМФ</button>
+									{{end}}
+									{{if eq .Question_status 3}}
+										<button type="button" class="btn btn-success" onclick="SMB(3);">Нет</button>
+									{{else}}
+										<button type="button" class="btn btn-success pss-dss-color" onclick="SMB(3);">Нет</button>
+									{{end}}
+									{{if eq .Question_status 4}}
+										<button type="button" class="btn btn-success" onclick="SMB(4);">Н/п</button>
+									{{else}}
+										<button type="button" class="btn btn-success pss-dss-color" onclick="SMB(4);">Н/п</button>
+									{{end}}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col col-12">
+						<h4 class="text-center">Как проверить?</h4>
+					</div>
+				</div>
+				<div class="row">
+					<ul class="col col-12 list-group">
+					{{range $key, $value := .Quest.Verify}}
+						<li class="list-group-item">{{$value}}</li>
+					{{end}}
+					</ul>
+				</div>
+				{{ if eq .HasAddition true }}
+				<br>
+				<div class="row">
+					<div class="container">
+						<div class="row">
+							<div class="col col-12">
+								<h4 class="text-center">Возможно будет полезно:</h4>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col col-12 text-left border rounded pss-dss-color">
+								<p class="strong text-light" id="Description"><span>{{.Quest.Addition}}</span></p>
+							</div>
+						</div>	
+					</div>
+				</div>
+				{{ end }}
+				<br>
+				{{if eq .HasMentor true}}
+				<div class="row">
+					<div class="col col-12">
+						<h3 class="text-center">Этот вопрос явлется частью вопроса №{{.Mentor.Number}}</h3>
+					</div>
+				</div>
+				<div class="row">
+					<div class="container">
+						<div class="row">
+							<div class="col col-12 text-left border rounded pss-dss-color">
+								<p class="strong text-light" id="Description"><span>{{.Mentor.Wording}}</span></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				{{end}}
+				{{ if eq .MentorHasAddition true }}
+				<br>
+				<div class="row">
+					<div class="container">
+						<div class="row">
+							<div class="col col-12">
+								<h4 class="text-center">Возможно будет полезно:</h4>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col col-12 text-left border rounded pss-dss-color">
+								<p class="strong text-light" id="Description"><span>{{.Mentor.Addition}}</span></p>
+							</div>
+						</div>	
+					</div>
+				</div>
+				{{ end }}
+			</div>
+		</div>
+	</main>
+	<div class="modal fade" id="KModal" tabindex="-1" role="dialog" aria-labelledby="KModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="KModalLabel">Укажите КМФ:</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	<form id="questionform" role="form" method="POST" action="">
+	      		<input type="hidden" id="QuestionStatus" name="QuestionStatus" value={{.Question_status}}>
+	      		<textarea class="form-control is-valid" id="KTextArea" name="KTextArea" rows="3">{{.Question_compenstaion}}</textarea>
+	      	</form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+	        <button type="button" class="btn btn-success pss-dss-color" onclick="SMB(2);">Подтвердить</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<script src="\assets\js\questions.js"></script>
+{{ template "footer" }}
+{{ end }}

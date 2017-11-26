@@ -1,0 +1,42 @@
+.page-content {
+	padding-top: 4rem;
+	padding-bottom: 2rem;
+}
+
+.pss-dss-color {
+	background-color: #007078;
+	border-color: #007078;
+}
+
+.pss-dss-border {
+	border-color: #007078;
+}
+
+.pss-dss-text {
+	color: #007078;
+}
+
+/*.hide-scroll {
+	height: 100%;
+    width: 100%;
+    overflow: hidden !important;
+}*/
+
+.tab-pane{
+ 	height: 10px;
+	overflow-y: auto;
+	width:100%;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; 
+}
+
+
+label.is-invalid {
+	display: none;
+	margin-top: .25rem;
+	font-size: .875rem;
+	color: #dc3545;
+}

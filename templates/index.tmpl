@@ -1,7 +1,430 @@
 {{ define "index" }}
-{{ template "header" }}
-<wrapper>
-<h1>Привет мир!</h1>
-</wrapper>
+{{ template "header" .Page_status}}
+	<main role="main" class="container page-content">
+		<script src="/assets/js/jquery.validate.js"></script>
+		{{ if eq  .Page_error 1 }}
+		<div class="row">
+			<div class="col-12">
+				<div class="alert alert-danger text-center" role="alert">Некорректное наименование юридического лица проверяемой организации</div>	
+			</div>
+		</div>
+		{{ end }}
+		{{ if eq  .Page_error 2 }}
+		<div class="row">
+			<div class="col-12">
+				<div class="alert alert-danger text-center" role="alert">Некорректное коммерческое обозначение проверяемой организации</div>	
+			</div>
+		</div>
+		{{ end }}
+		{{ if eq  .Page_error 3 }}
+		<div class="row">
+			<div class="col-12">
+				<div class="alert alert-danger text-center" role="alert">Некорректное контактное лицо проверяемой организации</div>	
+			</div>
+		</div>
+		{{ end }}
+		{{ if eq  .Page_error 4 }}
+		<div class="row">
+			<div class="col-12">
+				<div class="alert alert-danger text-center" role="alert">Некорректная должность контактного лица проверяемой организации</div>	
+			</div>
+		</div>
+		{{ end }}
+		{{ if eq  .Page_error 5 }}
+		<div class="row">
+			<div class="col-12">
+				<div class="alert alert-danger text-center" role="alert">Некорректный телефон проверяемой организации</div>	
+			</div>
+		</div>
+		{{ end }}
+		{{ if eq  .Page_error 6 }}
+		<div class="row">
+			<div class="col-12">
+				<div class="alert alert-danger text-center" role="alert">Некорректная эл. почта проверяемой организации</div>	
+			</div>
+		</div>
+		{{ end }}
+		{{ if eq  .Page_error 7 }}
+		<div class="row">
+			<div class="col-12">
+				<div class="alert alert-danger text-center" role="alert">Некорректные улица или дом проверяемой организации</div>	
+			</div>
+		</div>
+		{{ end }}
+		{{ if eq  .Page_error 8 }}
+		<div class="row">
+			<div class="col-12">
+				<div class="alert alert-danger text-center" role="alert">Некорректный город проверяемой организации</div>	
+			</div>
+		</div>
+		{{ end }}
+		{{ if eq  .Page_error 9 }}
+		<div class="row">
+			<div class="col-12">
+				<div class="alert alert-danger text-center" role="alert">Некорректные область или край проверяемой организации</div>	
+			</div>
+		</div>
+		{{ end }}
+		{{ if eq  .Page_error 10 }}
+		<div class="row">
+			<div class="col-12">
+				<div class="alert alert-danger text-center" role="alert">Некорректная страна проверяемой организации</div>	
+			</div>
+		</div>
+		{{ end }}
+		{{ if eq  .Page_error 11 }}
+		<div class="row">
+			<div class="col-12">
+				<div class="alert alert-danger text-center" role="alert">Некорректный почтовый индекс проверяемой организации</div>	
+			</div>
+		</div>
+		{{ end }}
+		{{ if eq  .Page_error 12 }}
+		<div class="row">
+			<div class="col-12">
+				<div class="alert alert-danger text-center" role="alert">Некорректный URL-адрес проверяемой организации</div>	
+			</div>
+		</div>
+		{{ end }}
+		{{ if eq  .Page_error 13 }}
+		<div class="row">
+			<div class="col-12">
+				<div class="alert alert-danger text-center" role="alert">Некорректное наименование юридического лица проверяющией организации</div>	
+			</div>
+		</div>
+		{{ end }}
+		{{ if eq  .Page_error 14 }}
+		<div class="row">
+			<div class="col-12">
+				<div class="alert alert-danger text-center" role="alert">Некорректное контактное лицо проверяющией организации</div>	
+			</div>
+		</div>
+		{{ end }}
+		{{ if eq  .Page_error 15 }}
+		<div class="row">
+			<div class="col-12">
+				<div class="alert alert-danger text-center" role="alert">Некорректная должность контакного лица проверяющией организации</div>	
+			</div>
+		</div>
+		{{ end }}
+		{{ if eq  .Page_error 16 }}
+		<div class="row">
+			<div class="col-12">
+				<div class="alert alert-danger text-center" role="alert">Некорректный телефон проверяющией организации</div>	
+			</div>
+		</div>
+		{{ end }}
+		{{ if eq  .Page_error 17 }}
+		<div class="row">
+			<div class="col-12">
+				<div class="alert alert-danger text-center" role="alert">Некорректная эл. почта проверяющией организации</div>	
+			</div>
+		</div>
+		{{ end }}
+		{{ if eq  .Page_error 18 }}
+		<div class="row">
+			<div class="col-12">
+				<div class="alert alert-danger text-center" role="alert">Некорректные улица или дом проверяющией организации</div>	
+			</div>
+		</div>
+		{{ end }}
+		{{ if eq  .Page_error 19 }}
+		<div class="row">
+			<div class="col-12">
+				<div class="alert alert-danger text-center" role="alert">Некорректный город проверяющией организации</div>	
+			</div>
+		</div>
+		{{ end }}
+		{{ if eq  .Page_error 20 }}
+		<div class="row">
+			<div class="col-12">
+				<div class="alert alert-danger text-center" role="alert">Некорректные область или край проверяющией организации</div>	
+			</div>
+		</div>
+		{{ end }}
+		{{ if eq  .Page_error 21 }}
+		<div class="row">
+			<div class="col-12">
+				<div class="alert alert-danger text-center" role="alert">Некорректная страна проверяющией организации</div>	
+			</div>
+		</div>
+		{{ end }}
+		{{ if eq  .Page_error 22 }}
+		<div class="row">
+			<div class="col-12">
+				<div class="alert alert-danger text-center" role="alert">Некорректный почтовый индекс проверяющией организации</div>	
+			</div>
+		</div>
+		{{ end }}
+		{{ if eq  .Page_error 23 }}
+		<div class="row">
+			<div class="col-12">
+				<div class="alert alert-danger text-center" role="alert">Некорректное URL-адрес проверяющией организации</div>	
+			</div>
+		</div>
+		{{ end }}
+		{{ if eq  .Page_error 24 }}
+		<div class="row">
+			<div class="col-12">
+				<div class="alert alert-danger text-center" role="alert">Некорректный тип аудита проверяющией организации</div>	
+			</div>
+		</div>
+		{{ end }}
+		<form id="settingsform" role="form" method="POST" action="">
+			<div class="row align-items-center">
+				<div class="col col-12">
+					<h3 class="text-center">Информация о проверяемой организации</h3>
+				</div>
+			</div>
+			<br>
+			<div class="form-group">
+				<div class="row">
+					<div class="col col-6">
+						<label for="InOrganizationName">Наименование юридического лица:</label>
+					</div>
+					<div class="col col-6">
+						<label for="CommercialDesignation">Коммерческое обозначение:</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col col-6">
+						<input type="text" class="is-valid form-control" id="InOrganizationName" name="InOrganizationName" placeholder="Введите наименование" value={{.Current_session.InOrganizationName}}>
+					</div>
+					<div class="col col-6">
+						<input type="text" class="is-valid form-control" id="CommercialDesignation" name="CommercialDesignation" placeholder="Введите обозначение" value={{.Current_session.CommercialDesignation}}>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="row">
+					<div class="col col-6">
+						<label for="InContactPerson">Контактное лицо:</label>
+					</div>
+					<div class="col col-6">
+						<label for="InContactPersonPost">Должность:</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col col-6">
+						<input type="text" class="is-valid form-control" id="InContactPerson" name="InContactPerson" placeholder="Введите контактное лицо" value={{.Current_session.InContactPerson}}>
+					</div>
+					<div class="col col-6">
+						<input type="text" class="is-valid form-control" id="InContactPersonPost" name="InContactPersonPost" placeholder="Введите должность" value={{.Current_session.InContactPersonPost}}>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="row">
+					<div class="col col-6">
+						<label for="InPhone">Телефон:</label>
+					</div>
+					<div class="col col-6">
+						<label for="InEmail">Эл. почта:</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col col-6">
+						<input type="text" class="is-valid form-control" id="InPhone" name="InPhone" placeholder="Введите номер телефона" value={{.Current_session.InPhone}}>
+					</div>
+					<div class="col col-6">
+						<input type="text" class="is-valid form-control" id="InEmail" name="InEmail" placeholder="Ввведите адресс эл. почты" value={{.Current_session.InEmail}}>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="row">
+					<div class="col col-6">
+						<label for="InAddress">Улица, дом:</label>
+					</div>
+					<div class="col col-6">
+						<label for="InCity">Город:</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col col-6">
+						<input type="text" class="is-valid form-control" id="InAddress" name="InAddress" placeholder="Введите улицу и дом" value={{.Current_session.InAddress}}>
+					</div>
+					<div class="col col-6">
+						<input type="text" class="is-valid form-control" id="InCity" name="InCity" placeholder="Ввведите город" value={{.Current_session.InCity}}>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="row">
+					<div class="col col-4">
+						<label for="InState">Область, край:</label>
+					</div>
+					<div class="col col-4">
+						<label for="InCountry">Страна:</label>
+					</div>
+					<div class="col col-4">
+						<label for="InIndex">Почтовый индекс:</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col col-4">
+						<input type="text" class="is-valid form-control" id="InState" name="InState" placeholder="Введите область или край" value={{.Current_session.InState}}>
+					</div>
+					<div class="col col-4">
+						<input type="text" class="is-valid form-control" id="InCountry" name="InCountry" placeholder="Ввведите страну" value={{.Current_session.InCountry}}>
+					</div>
+					<div class="col col-4">
+						<input type="text" class="is-valid form-control" id="InIndex" name="InIndex" placeholder="Ввведите почтовый индекс" value={{.Current_session.InIndex}}>
+					</div>
+				</div>
+			</div>
+			<div class="row">	
+				<div class="col col-12">
+					<div class="form-group">
+						<label for="InURL">URL-адрес:</label>
+						<input type="text" class="is-valid form-control" id="InURL" name="InURL" placeholder="Введите URL-адрес" value={{.Current_session.InURL}}>
+					</div>
+				</div>
+			</div>
+			<br>
+			<div class="row align-items-center">
+				<div class="col col-12">
+					<h3 class="text-center">Информация об организации проводящей аудит</h3>
+				</div>
+			</div>
+			<br>
+			<div class="form-group">
+				<div class="row">
+					<div class="col col-6">
+						<label for="OutOrganizationName">Наименование юридического лица:</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col col-6">
+						<input type="text" class="is-valid form-control" id="OutOrganizationName" name="OutOrganizationName" placeholder="Введите наименование" value={{.Current_session.OutOrganizationName}}>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="row">
+					<div class="col col-6">
+						<label for="OutContactPerson">Контактное лицо:</label>
+					</div>
+					<div class="col col-6">
+						<label for="OutContactPersonPost">Должность:</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col col-6">
+						<input type="text" class="is-valid form-control" id="OutContactPerson" name="OutContactPerson" placeholder="Введите контактное лицо" value={{.Current_session.OutContactPerson}}>
+					</div>
+					<div class="col col-6">
+						<input type="text" class="is-valid form-control" id="OutContactPersonPost" name="OutContactPersonPost" placeholder="Введите должность" value={{.Current_session.OutContactPersonPost}}>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="row">
+					<div class="col col-6">
+						<label for="OutPhone">Телефон:</label>
+					</div>
+					<div class="col col-6">
+						<label for="OutEmail">Эл. почта:</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col col-6">
+						<input type="text" class="is-valid form-control" id="OutPhone" name="OutPhone" placeholder="Введите номер телефона" value={{.Current_session.OutPhone}}>
+					</div>
+					<div class="col col-6">
+						<input type="text" class="is-valid form-control" id="OutEmail" name="OutEmail" placeholder="Ввведите адресс эл. почты" value={{.Current_session.OutEmail}}>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="row">
+					<div class="col col-6">
+						<label for="OutAddress">Улица, дом:</label>
+					</div>
+					<div class="col col-6">
+						<label for="OutCity">Город:</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col col-6">
+						<input type="text" class="is-valid form-control" id="OutAddress" name="OutAddress" placeholder="Введите улицу и дом" value={{.Current_session.OutAddress}}>
+					</div>
+					<div class="col col-6">
+						<input type="text" class="is-valid form-control" id="OutCity" name="OutCity" placeholder="Ввведите город" value={{.Current_session.OutCity}}>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="row">
+					<div class="col col-4">
+						<label for="OutState">Область, край:</label>
+					</div>
+					<div class="col col-4">
+						<label for="OutCountry">Страна:</label>
+					</div>
+					<div class="col col-4">
+						<label for="OutIndex">Почтовый индекс:</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col col-4">
+						<input type="text" class="is-valid form-control" id="OutState" name="OutState" placeholder="Введите область или край" value={{.Current_session.OutState}}>
+					</div>
+					<div class="col col-4">
+						<input type="text" class="is-valid form-control" id="OutCountry" name="OutCountry" placeholder="Ввведите страну" value={{.Current_session.OutCountry}}>
+					</div>
+					<div class="col col-4">
+						<input type="text" class="is-valid form-control" id="OutIndex" name="OutIndex" placeholder="Ввведите почтовый индекс" value={{.Current_session.OutIndex}}>
+					</div>
+				</div>
+			</div>
+			<div class="row">	
+				<div class="col col-12">
+					<div class="form-group">
+						<label for="OutURL">URL-адрес:</label>
+						<input type="text" class="is-valid form-control" id="OutURL" name="OutURL" placeholder="Введите URL-адрес" value={{.Current_session.OutURL}}>
+					</div>
+				</div>
+			</div>
+			{{range $key, $value := .List_types}}
+				<div class="hidden" id={{$key}} item-text={{$value.Description}}></div>
+			{{end}}
+			<input type="hidden" id="TypeId" name="TypeId" value={{.Current_session.TypeId}}>
+			<br>
+			<div class="row align-items-center">
+				<div class="col col-12">
+					<h3 class="text-center">Тип проводимого аудита</h3>
+				</div>
+			</div>
+			<br>
+			<div class="container">
+				<div class="row">
+					<div class="col col-10 text-left border rounded pss-dss-color">
+						<p class="small text-light" id="Description"><span>{{ (index .List_types .Current_session.TypeId).Description }}</span></p>
+					</div>
+					<div class="col col-2">
+						<div class="dropdown">
+						  <button class="btn btn-success pss-dss-color dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						    {{ (index .List_types .Current_session.TypeId).Name }}
+						  </button>
+						  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						  	{{range $key, $value := .List_types}}
+						  		<a class="dropdown-item" item-index={{$key}}>{{$value.Name}}</a>
+						  	{{end}}
+						  </div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<script src="/assets/js/audit_types.js"></script>
+			<br>
+			<div class="row">
+				<div class="col col-12">
+					<button type="submit" class="btn btn-success btn-block pss-dss-color">Примените изменения</button>
+				</div>
+			</div>
+			<br>	
+		</form>
+	</main>
 {{ template "footer" }}
 {{ end }}

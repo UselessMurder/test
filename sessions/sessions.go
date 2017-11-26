@@ -11,12 +11,59 @@ const (
 	COOKIE_NAME = "testsessionid"
 )
 
+type StoredQuestion struct {
+	Status       uint8
+	Сompensation string
+	Number       string
+}
+
+type StoredTest struct {
+	Complete   bool
+	FirstIndex int
+	Questions  map[int]*StoredQuestion
+}
+
 type Session struct {
-	SessionHash    string
-	IsTestRunning  bool
-	TestType       uint8
-	QuestionNumber uint16
-	ExpireTime     time.Time
+	SessionHash           string
+	Fixed                 bool
+	TypeId                int
+	CurrentTestId         int
+	CurrentQuestionId     int
+	InOrganizationName    string
+	CommercialDesignation string
+	InContactPerson       string
+	InContactPersonPost   string
+	InPhone               string
+	InEmail               string
+	InAddress             string
+	InCity                string
+	InState               string
+	InCountry             string
+	InIndex               string
+	InURL                 string
+	OutOrganizationName   string
+	OutContactPerson      string
+	OutContactPersonPost  string
+	OutPhone              string
+	OutEmail              string
+	OutAddress            string
+	OutCity               string
+	OutState              string
+	OutCountry            string
+	OutIndex              string
+	OutURL                string
+	Tests                 map[int]*StoredTest
+	ExpireTime            time.Time
+}
+
+func CreateSession(hash string, t time.Time) *Session {
+	var currentSession Session
+	currentSession.SessionHash = hash
+	currentSession.Fixed = false
+	currentSession.TypeId = 1
+	currentSession.Tests = make(map[int]*StoredTest)
+	currentSession.ExpireTime = t
+	return &currentSession
 }
 
 type SessionManager struct {
@@ -98,7 +145,7 @@ func (sm *SessionManager) GetCookie(r *http.Request, w http.ResponseWriter) stri
 		hash, _ := hashgenerator.GenerateHash28(time.Now().String(), "User")
 		t := time.Now().Add(24 * time.Hour)
 
-		sm.setChan <- &Session{hash, false, 0, 0, t}
+		sm.setChan <- CreateSession(hash, t)
 
 		cookie = &http.Cookie{
 			Name:    COOKIE_NAME,

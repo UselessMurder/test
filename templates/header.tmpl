@@ -1,19 +1,71 @@
 {{define "header"}}
 
-
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Тест</title>
+	<title>PCI DSS</title>
 	<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/assets/css/style.css">
+	<script src="/assets/js/jquery-3.2.1.js"></script>
+    <script src="/assets/js/popper.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
 </head>
 <body> 
-<header>
-
-</header>
-
+	<nav class="navbar navbar-expand-md navbar-dark pss-dss-color fixed-top" id="top-navbar">
+	  <a class="navbar-brand" href="/">PCI DSS</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarNav">
+	    <ul class="navbar-nav">
+	    {{if eq . 0}}
+		      <li class="nav-item active">
+		        <a class="nav-link" href="/">Параметры аудита</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link disabled">Tесты</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link disabled">Результаты</a>
+		      </li>
+		{{ end }}
+		{{if eq . 1}}
+			  <li class="nav-item active">
+		        <a class="nav-link" href="/">Параметры аудита</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="/tests">Tесты</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="/results">Результаты</a>
+		      </li>
+		{{ end }}
+		{{if eq . 2}}
+			  <li class="nav-item">
+		        <a class="nav-link" href="/">Параметры аудита</a>
+		      </li>
+		      <li class="nav-item active">
+		        <a class="nav-link" href="/tests">Tесты</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="/results">Результаты</a>
+		      </li>
+		{{ end }}
+		{{if eq . 3}}
+			  <li class="nav-item">
+		        <a class="nav-link" href="/">Параметры аудита</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="/tests">Tесты</a>
+		      </li>
+		      <li class="nav-item active">
+		        <a class="nav-link" href="/results">Результаты</a>
+		      </li>
+		{{ end }}
+	    </ul>
+	   </div>
+	</nav>
 {{ end }}

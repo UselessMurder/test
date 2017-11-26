@@ -1,0 +1,18 @@
+{{ define "tests" }}
+{{ template "header" .Page_status}}
+	<main role="main" class="container page-content">
+		<div class="row">
+			<div class="btn-group-vertical">
+				{{range $key, $value := .Requirements}}
+					{{if eq $value.Complete true}}
+						<a type="button" class="btn btn-lg btn-block btn-success pss-dss-color" href="/tests/questions?tid={{$key}}" role="button">{{$value.Wording}}</a>
+					{{else}}
+						<a type="button" class="btn btn-lg btn-block btn-outline-success pss-dss-text" href="/tests/questions?tid={{$key}}" role="button">{{$value.Wording}}</a>
+					{{end}}
+				{{end}}
+			</div>
+		</div>
+		<br>
+	</main>
+{{ template "footer" }}
+{{ end }}
