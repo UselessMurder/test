@@ -61,6 +61,7 @@ func main() {
 	r.GET("/tests", routes.GetTestsHandler)
 	r.GET("/tests/questions", routes.GetQuestionsHandler)
 	r.GET("/results", routes.GetResultsHandler)
+	r.GET("/results/report", routes.GetReportHandler)
 	r.POST("/", routes.PostIndexHandler)
 	r.POST("/tests/questions", routes.PostQuestionsHandler)
 	r.LoadHTMLGlob("templates/*")

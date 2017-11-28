@@ -4,3 +4,5 @@ GetQuestionsWithReq:select question.id, question.number from requirement inner j
 GetRequrinmentById:select * from requirement where requirement.id = $1
 GetQuestionWithId:select question.id, question.number, question.wording, question.addition, question.verify from question where question.id = $1
 GetSeniorWithQId:select senior.id, senior.number, senior.wording, senior.addition from senior inner join question on senior.id = question.mentor where question.id = $1
+GetTypeListWithId:select type_list.description from type_list where type_list.id = $1
+GetClarifyWithQue:select clarification.id, clarification.wording from question inner join clarification on question.clarify = clarification.id where question.id = $1

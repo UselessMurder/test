@@ -1,7 +1,11 @@
 "use_strict";
 (function() {
 	function set_hight() {
-   		$('.tab-pane').height($(window).height() - $("#top-navbar").height() * 2.7);
+		if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1){
+    		$('.tab-pane').height($(window).height() - $("#top-navbar").height() * 3.8);
+		} else {
+   			$('.tab-pane').height($(window).height() - $("#top-navbar").height() * 2.7);
+   		}
 	}
 	function submitForm(val) {
 		$("#QuestionStatus").val(val);

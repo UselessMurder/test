@@ -110,7 +110,6 @@ func PostQuestionsHandler(c *gin.Context) {
 	qc := questions_content{}
 	statusStr := c.PostForm("QuestionStatus")
 	status, err := strconv.Atoi(statusStr)
-	log.Println("Status:", status)
 	if err != nil || status < 1 || status > 4 {
 		init_question_content(&qc, currentSession, db)
 		qc.Page_error = 2
@@ -131,9 +130,16 @@ func PostQuestionsHandler(c *gin.Context) {
 	var keys []int
 	keys = make([]int, len(currentSession.Tests[currentSession.CurrentTestId].Questions))
 	i := 0
-	for k := range currentSession.Tests[currentSession.CurrentTestId].Questions {
+	j := 1
+	for k, v := range currentSession.Tests[currentSession.CurrentTestId].Questions {
 		keys[i] = k
 		i++
+		if v.Status != 0 {
+			j++
+		}
+	}
+	if j == len(currentSession.Tests[currentSession.CurrentTestId].Questions) {
+		currentSession.Tests[currentSession.CurrentTestId].Complete = true
 	}
 	sort.Ints(keys)
 	for k, v := range keys {

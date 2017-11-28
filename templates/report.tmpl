@@ -1,0 +1,191 @@
+{{ define "report" }}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Отчет PCI DSS</title>
+	<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/assets/css/style.css">
+	<script src="/assets/js/jquery-3.2.1.js"></script>
+    <script src="/assets/js/popper.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/node_modules/jspdf/dist/jspdf.min.js"></script>
+    <script src="/assets/js/node_modules/html2canvas/dist/html2canvas.min.js"></script>
+    <script src="/assets/js/node_modules/html2pdf.js/dist/html2pdf.min.js"></script>
+    <script src="/assets/js/report.js"></script>
+</head>
+<body> 
+	<div class="container">
+		<br>
+		<div class="row">
+			<div class="col col-12">
+				<button id="ignorePDF" type="button" class="btn btn-block btn-success pss-dss-color" onclick="SMB();">Сохранить в pdf</button>
+			</div>
+		</div>
+		<br>
+	</div>
+	<main id="content" role="main" class="container">
+		<div class="row">
+			<div class="col col-12 pss-dss-color border rounded text-light">
+				<blockquote class="blockquote">
+				  <h2 class="mb-0">Отчет PCI DSS</h2>
+				  <footer class="blockquote-footer text-light">{{.CurrentTime}}</footer>
+				</blockquote>
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<h3 class="col-12 text-center">О программе</h3>
+		</div>
+		<br>
+		<dl class="row">
+			<dt class="col-4">Выполнили:</dt>
+			<dd class="col-8">Марков А.К, Меньщиков Р.Д.</dd>
+			<dt class="col-4">Группа:</dt>
+			<dd class="col-8">Т-509.13</dd>
+			<dt class="col-4">Проверил:</dt>
+			<dd class="col-8">Москвин В.В.</dd>
+		</dl>
+		<br>
+		<div class="row">
+			<h3 class="col-12 text-center">Информация о проверяемой организации</h3>
+		</div>
+		<br>
+		<dl class="row">
+			<dt class="col-4">Наименование юридического лица:</dt>
+			<dd class="col-8">{{.CurrentSession.InOrganizationName}}</dd>
+			<dt class="col-4">Коммерческое обозначение:</dt>
+			<dd class="col-8">{{.CurrentSession.CommercialDesignation}}</dd>
+			<dt class="col-4">Контактное лицо:</dt>
+			<dd class="col-8">{{.CurrentSession.InContactPerson}}</dd>
+			<dt class="col-4">Должность:</dt>
+			<dd class="col-8">{{.CurrentSession.InContactPersonPost}}</dd>
+			<dt class="col-4">Телефон:</dt>
+			<dd class="col-8">{{.CurrentSession.InPhone}}</dd>
+			<dt class="col-4">Эл. почта:</dt>
+			<dd class="col-8">{{.CurrentSession.InEmail}}</dd>
+			<dt class="col-4">Улица, дом:</dt>
+			<dd class="col-8">{{.CurrentSession.InAddress}}</dd>
+			<dt class="col-4">Город:</dt>
+			<dd class="col-8">{{.CurrentSession.InCity}}</dd>
+			<dt class="col-4">Область, край:</dt>
+			<dd class="col-8">{{.CurrentSession.InState}}</dd>
+			<dt class="col-4">Страна:</dt>
+			<dd class="col-8">{{.CurrentSession.InCountry}}</dd>
+			<dt class="col-4">Почтовый индекс:</dt>
+			<dd class="col-8">{{.CurrentSession.InIndex}}</dd>
+			<dt class="col-4">URL-адрес:</dt>
+			<dd class="col-8">{{.CurrentSession.InURL}}</dd>
+		</dl>
+		<br>
+		<div class="row">
+			<h3 class="col-12 text-center">Информация об организации проводящей аудит</h3>
+		</div>
+		<br>
+		<dl class="row">
+			<dt class="col-4">Наименование юридического лица:</dt>
+			<dd class="col-8">{{.CurrentSession.OutOrganizationName}}</dd>
+			<dt class="col-4">Контактное лицо:</dt>
+			<dd class="col-8">{{.CurrentSession.OutContactPerson}}</dd>
+			<dt class="col-4">Должность:</dt>
+			<dd class="col-8">{{.CurrentSession.OutContactPersonPost}}</dd>
+			<dt class="col-4">Телефон:</dt>
+			<dd class="col-8">{{.CurrentSession.OutPhone}}</dd>
+			<dt class="col-4">Эл. почта:</dt>
+			<dd class="col-8">{{.CurrentSession.OutEmail}}</dd>
+			<dt class="col-4">Улица, дом:</dt>
+			<dd class="col-8">{{.CurrentSession.OutAddress}}</dd>
+			<dt class="col-4">Город:</dt>
+			<dd class="col-8">{{.CurrentSession.OutCity}}</dd>
+			<dt class="col-4">Область, край:</dt>
+			<dd class="col-8">{{.CurrentSession.OutState}}</dd>
+			<dt class="col-4">Страна:</dt>
+			<dd class="col-8">{{.CurrentSession.OutCountry}}</dd>
+			<dt class="col-4">Почтовый индекс:</dt>
+			<dd class="col-8">{{.CurrentSession.OutIndex}}</dd>
+			<dt class="col-4">URL-адрес:</dt>
+			<dd class="col-8">{{.CurrentSession.OutURL}}</dd>
+		</dl>
+		<br>
+		<div class="row">
+			<h3 class="col-12 text-center">Тип проводимого аудита</h3>
+		</div>
+		<br>
+		<div class="row border rounded pss-dss-color">
+			<p class="col-12 small text-light">{{.TypeDescription}}</p>
+		</div>
+		<br>
+		
+		{{range $key, $value := .Requirements}}
+		<div class="row">
+			{{if eq $value.ReqType 1}}
+			<div class="col col-12">
+				<h5 class="text-center">Тест не пройден:</h5>
+			</div>
+			<div class="col col-12">
+				<div class="alert alert-secondary" role="alert">{{$value.Wording}}</div>
+			</div>
+			{{end}}
+			{{if eq $value.ReqType 2}}
+			<div class="col col-12">
+				<h5 class="text-center">Требование выполнено:</h5>
+			</div>
+			<div class="col col-12">
+				<div class="alert alert-success" role="alert">{{$value.Wording}}</div>
+			</div>
+			{{end}}
+			{{if eq $value.ReqType 3}}
+			<div class="col col-12">
+				<h5 class="text-center">Требование не выполнено:</h5>
+			</div>
+			<div class="col col-12">
+				<div class="alert alert-danger" role="alert">{{$value.Wording}}</div>
+			</div>
+			<div class="col col-12">
+				<h6 class="text-center">Чтобы исправить: {{ $value.Solution}}</h6>
+			</div>
+			{{end}}
+		</div>
+		<div class="row">
+			<div class="col col-12">
+				<h6>Завершено:</h6>
+			</div>
+			<div class="col col-12">
+				<div class="progress">
+					{{if not (eq $value.ReqType 1)}}
+					<div class="progress-bar pss-dss-color" role="progressbar" style="width: {{$value.CompletePercent}}%;" aria-valuenow={{$value.CompletePercent}} aria-valuemin="0" aria-valuemax="100">{{$value.CompletePercent}}%</div>
+					{{else}}
+					<div class="progress-bar pss-dss-color" role="progressbar" style="width: {{$value.CompletePercent}}%;" aria-valuenow={{$value.CompletePercent}} aria-valuemin="0" aria-valuemax="100"></div>
+					{{end}}
+				</div>
+		 	</div>
+		</div>
+		<br>
+		<div class="row">
+		 	<div class="col col-12">
+				<h6>Выполнено:</h6>
+			</div>
+		 	<div class="col col-12">
+		 		<div class="progress">
+					{{if not (eq $value.ReqType 1)}}
+					<div class="progress-bar bg-success" role="progressbar" style="width: {{$value.GoodPercent}}%;" aria-valuenow={{$value.GoodPercent}} aria-valuemin="0" aria-valuemax="100">{{$value.GoodPercent}}%</div>
+					{{else}}
+					<div class="progress-bar bg-success" role="progressbar" style="width: {{$value.GoodPercent}}%;" aria-valuenow={{$value.GoodPercent}} aria-valuemin="0" aria-valuemax="100"></div>
+					{{end}}
+				</div>
+			</div>
+		</div>
+			<br>
+			{{if not (eq $value.ReqType 1)}}
+				{{template "clarify" (index $.Clarifications $key)}}
+			{{end}}
+			<br>
+		{{end}}	
+	</main>
+</body>
+<footer>
+</footer>
+</html>
+{{end}}

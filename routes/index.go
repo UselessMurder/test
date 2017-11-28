@@ -23,7 +23,6 @@ func indexHandler(c *gin.Context, ic *index_content) {
 	if ic.Current_session.Fixed {
 		ic.Page_status = 1
 	}
-	log.Println(ic)
 	c.HTML(http.StatusOK, "index", ic)
 }
 
@@ -76,7 +75,7 @@ func PostIndexHandler(c *gin.Context) {
 	currentSession.OutCountry = c.PostForm("OutCountry")
 	currentSession.OutIndex = c.PostForm("OutIndex")
 	currentSession.OutURL = c.PostForm("OutURL")
-	errCode := 0 //validate(currentSession)
+	errCode := validate(currentSession)
 	types := make(map[int]models.AuditType)
 	intr, _ = c.Get("database")
 	db := intr.(*dbwrapper.DataBaseWrapper)

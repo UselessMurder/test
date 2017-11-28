@@ -1,0 +1,40 @@
+{{define "clarify"}}
+	{{if eq .IsEmpty true}}
+	<div class="row">
+		<div class="col col-12">
+			<h6>Пояснения: Отсутствуют...</h6>
+		</div>
+	</div>
+	{{else}}
+		<div class="row">
+			<div class="col col-12">
+				<h6>Пояснения:</h6>
+			</div>
+		</div>
+			<br>
+			{{if eq .IsK true}}
+			<div class="row">
+				<div class="col col-12">
+					<dl class="row">
+						{{range $key, $value := .WithK}}
+						<dt class="col-4 small">КМФ для вопроса №{{$value.Number}}:</dt>
+						<dd class="col-8 small">{{$value.Сompensation}}</dd>
+						{{end}}
+					</dl>
+				</div>
+			</div>
+			{{end}}
+			{{if eq .IsC true}}
+			<div class="row">
+				<div class="col col-12">
+					<dl class="row">
+						{{range $key, $value := .WithC}}
+						<dt class="col-4 small">Вопросы:{{range $k, $v := $value.Questions}}{{$v}};{{end}}</dt>
+						<dd class="col-8 small border rounded pss-dss-color text-light">{{$value.Wording}}</dd>
+						{{end}}
+					</dl>
+				</div>
+			</div>
+			{{end}}
+	{{end}}
+{{end}}

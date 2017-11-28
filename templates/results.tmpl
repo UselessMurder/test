@@ -1,7 +1,65 @@
-{{ define "questions" }}
+{{ define "results" }}
 {{ template "header" .Page_status}}
 	<main role="main" class="container page-content">
-		
+		<div class="row">
+			{{range $key, $value := .Requirements}}
+				{{if eq $value.ReqType 1}}
+				<div class="col col-12">
+					<h5 class="text-center">Тест не пройден:</h5>
+				</div>
+				<div class="col col-12">
+					<div class="alert alert-secondary" role="alert">{{$value.Wording}}</div>
+				</div>
+				{{end}}
+				{{if eq $value.ReqType 2}}
+				<div class="col col-12">
+					<h5 class="text-center">Требование выполнено:</h5>
+				</div>
+				<div class="col col-12">
+					<div class="alert alert-success" role="alert">{{$value.Wording}}</div>
+				</div>
+				{{end}}
+				{{if eq $value.ReqType 3}}
+				<div class="col col-12">
+					<h5 class="text-center">Требование не выполнено:</h5>
+				</div>
+				<div class="col col-12">
+					<div class="alert alert-danger" role="alert">{{$value.Wording}}</div>
+				</div>
+				{{end}}
+				<div class="col col-12">
+					<h6>Завершено:</h6>
+				</div>
+				<div class="col col-12">
+					<div class="progress">
+						{{if not (eq $value.ReqType 1)}}
+						<div class="progress-bar pss-dss-color" role="progressbar" style="width: {{$value.CompletePercent}}%;" aria-valuenow={{$value.CompletePercent}} aria-valuemin="0" aria-valuemax="100">{{$value.CompletePercent}}%</div>
+						{{else}}
+						<div class="progress-bar pss-dss-color" role="progressbar" style="width: {{$value.CompletePercent}}%;" aria-valuenow={{$value.CompletePercent}} aria-valuemin="0" aria-valuemax="100"></div>
+						{{end}}
+					</div>
+			 	</div>
+			 	<br>
+			 	<div class="col col-12">
+					<h6>Выполнено:</h6>
+				</div>
+			 	<div class="col col-12">
+			 		<div class="progress">
+						{{if not (eq $value.ReqType 1)}}
+						<div class="progress-bar bg-success" role="progressbar" style="width: {{$value.GoodPercent}}%;" aria-valuenow={{$value.GoodPercent}} aria-valuemin="0" aria-valuemax="100">{{$value.GoodPercent}}%</div>
+						{{else}}
+						<div class="progress-bar bg-success" role="progressbar" style="width: {{$value.GoodPercent}}%;" aria-valuenow={{$value.GoodPercent}} aria-valuemin="0" aria-valuemax="100"></div>
+						{{end}}
+					</div>
+				</div>
+				<br>
+			{{end}}	
+			<br>
+			<div class="col col-12">
+				<a class="btn btn-block btn-success pss-dss-color" href="/results/report" target="_blank" role="button">Сформировать отчет</a>
+			</div>
+		</div>
+		<br>
 	</main>
 {{ template "footer" }}
 {{ end }}
