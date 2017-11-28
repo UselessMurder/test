@@ -1,8 +1,7 @@
 "use_strict";
 (function() {
-	function savePDF() { 
-	 	var element = document.getElementById('content');
-		html2pdf(element, {
+	function savePDF() {
+		html2pdf($("#content")[0], {
 		  margin:       0,
 		  filename:     'report.pdf',
 		  image:        { type: 'jpeg', quality: 1 },
